@@ -62,23 +62,7 @@ namespace Tmx
 
     void TileLayer::Parse(const tinyxml2::XMLNode *tileLayerNode) 
     {
-        const tinyxml2::XMLElement *tileLayerElem = tileLayerNode->ToElement();
-    
-        // Read the attributes.
-        name = tileLayerElem->Attribute("name");
-
-        tileLayerElem->QueryIntAttribute("x", &x);
-        tileLayerElem->QueryIntAttribute("y", &y);
-
-        tileLayerElem->QueryFloatAttribute("opacity", &opacity);
-        tileLayerElem->QueryBoolAttribute("visible", &visible);
-
-        // Read the properties.
-        const tinyxml2::XMLNode *propertiesNode = tileLayerNode->FirstChildElement("properties");
-        if (propertiesNode) 
-        {
-            properties.Parse(propertiesNode);
-        }
+        Layer::Parse(tileLayerNode);
 
         // Allocate memory for reading the tiles.
         tile_map = new MapTile[width * height];

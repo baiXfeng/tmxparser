@@ -69,10 +69,13 @@ namespace Tmx
         virtual ~Layer();
 
         /// Parse a layer element.
-        virtual void Parse(const tinyxml2::XMLNode *layerNode) = 0;
+        virtual void Parse(const tinyxml2::XMLNode *layerNode);
 
         /// Get the pointer to the parent map.
         const Tmx::Map *mapGetMap() const { return map; }
+
+        /// Get the id of the layer.
+        int GetId() const { return id; }
 
         /// Get the name of the layer.
         const std::string &GetName() const { return name; }
@@ -110,16 +113,36 @@ namespace Tmx
         /// Get the type of the layer.
         Tmx::LayerType GetLayerType() const { return layerType; }
 
+        /// Get the offset x of the layer.
+        float GetOffsetX() const { return offsetX; }
+
+        /// Get the offset y of the layer.
+        float GetOffsetY() const { return offsetY; }
+
+        /// Get the parallax factor of the layer.
+        float GetParallaxX() const { return parallaxX; }
+
+        /// Get the parallax factor of the layer.
+        float GetParallaxY() const { return parallaxY; }
+
     protected:
         /// @cond INTERNAL
         const Tmx::Map *map;
 				const Tmx::Tile *tile;
         std::string name;
 
+        int id;
+
         int x;
         int y;
         int width;
         int height;
+
+        float offsetX;
+        float offsetY;
+
+        float parallaxX;
+        float parallaxY;
 
         float opacity;
         bool visible;

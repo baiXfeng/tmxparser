@@ -47,19 +47,9 @@ namespace Tmx {
 
     void GroupLayer::Parse(const tinyxml2::XMLNode *groupLayerNode)
     {
+        Layer::Parse(groupLayerNode);
+
         const tinyxml2::XMLElement *groupLayerElem = groupLayerNode->ToElement();
-
-        // Read all the attributes into local variables.
-        name = groupLayerElem->Attribute("name");
-
-        groupLayerElem->QueryIntAttribute("x", &x);
-        groupLayerElem->QueryIntAttribute("y", &y);
-
-        groupLayerElem->QueryIntAttribute("offsetx", &offsetX);
-        groupLayerElem->QueryIntAttribute("offsety", &offsetY);
-
-        groupLayerElem->QueryFloatAttribute("opacity", &opacity);
-        groupLayerElem->QueryBoolAttribute("visible", &visible);
 
         // Parse the group.
         const tinyxml2::XMLNode *child = groupLayerElem->FirstChild();
@@ -88,14 +78,6 @@ namespace Tmx {
             }
             child = child->NextSiblingElement();
         }
-
-        // Parse the properties if any.
-        const tinyxml2::XMLNode *propertiesNode = groupLayerElem->FirstChildElement("properties");
-
-        if (propertiesNode)
-        {
-            properties.Parse(propertiesNode);
-        }
     }
 
     void GroupLayer::AddChild(Tmx::Layer* childLayer)
@@ -116,19 +98,4 @@ namespace Tmx {
         return children.size();
     }
 
-    void GroupLayer::SetOffset(const int offsetX, const int offsetY)
-    {
-        this->offsetX = offsetX;
-        this->offsetY = offsetY;
-    }
-
-    int GroupLayer::GetOffsetX() const noexcept
-    {
-        return offsetX;
-    }
-
-    int GroupLayer::GetOffsetY() const noexcept
-    {
-        return offsetY;
-    }
 }

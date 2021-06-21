@@ -129,6 +129,9 @@ namespace Tmx
         /// Parse text containing TMX formatted XML.
         void ParseText(const std::string &text);
 
+        /// Parse text containing TMX formatted XML.
+        void ParseText(const std::string &text, const std::string &fileName);
+
         /// Get the filename used to read the map.
         const std::string &GetFilename() const { return file_name; }
 

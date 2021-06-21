@@ -59,11 +59,10 @@ namespace Tmx
         , zOrder(nextParseOrder)
         , parseOrder(nextParseOrder)
         , layerType(_layerType)
-        , properties()
-    {
+        , properties() {
         ++nextParseOrder;
     }
-		Layer::Layer(const Tmx::Tile *_tile, const std::string _name, const int _x, const int _y, const int _width, const int _height, const float _opacity, const bool _visible, const LayerType _layerType) 
+    Layer::Layer(const Tmx::Tile *_tile, const std::string _name, const int _x, const int _y, const int _width, const int _height, const float _opacity, const bool _visible, const LayerType _layerType)
         : map(NULL)
 				, tile(_tile)
         , name(_name)
@@ -76,11 +75,38 @@ namespace Tmx
         , zOrder(nextParseOrder)
         , parseOrder(nextParseOrder)
         , layerType(_layerType)
-        , properties()
-    {
+        , properties() {
         ++nextParseOrder;
     }
-    Layer::~Layer() 
-    {
+    Layer::~Layer() {
+    }
+    void Layer::Parse(const tinyxml2::XMLNode *layerNode) {
+        auto elem = layerNode->ToElement();
+        auto t_name = elem->Attribute("name");
+        name = t_name == nullptr ? "" : t_name;
+
+        elem->QueryIntAttribute("id", &id);
+
+        elem->QueryIntAttribute("x", &x);
+        elem->QueryIntAttribute("y", &y);
+
+        elem->QueryIntAttribute("width", &width);
+        elem->QueryIntAttribute("height", &height);
+
+        elem->QueryFloatAttribute("offsetx", &offsetX);
+        elem->QueryFloatAttribute("offsety", &offsetY);
+
+        elem->QueryFloatAttribute("parallaxx", &parallaxX);
+        elem->QueryFloatAttribute("parallaxy", &parallaxY);
+
+        elem->QueryFloatAttribute("opacity", &opacity);
+        elem->QueryBoolAttribute("visible", &visible);
+
+        // Parse the properties if any.
+        const tinyxml2::XMLNode *propertiesNode = elem->FirstChildElement("properties");
+
+        if (propertiesNode) {
+            properties.Parse(propertiesNode);
+        }
     }
 }

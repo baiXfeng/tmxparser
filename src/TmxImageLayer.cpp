@@ -47,32 +47,16 @@ namespace Tmx
 
     void ImageLayer::Parse(const tinyxml2::XMLNode *imageLayerNode)
     {
+        Layer::Parse(imageLayerNode);
+
         const tinyxml2::XMLElement *imageLayerElem = imageLayerNode->ToElement();
-
-        // Read all the attributes into local variables.
-        name = imageLayerElem->Attribute("name");
-
-        imageLayerElem->QueryIntAttribute("x", &x);
-        imageLayerElem->QueryIntAttribute("y", &y);
-
-        imageLayerElem->QueryFloatAttribute("opacity", &opacity);
-        imageLayerElem->QueryBoolAttribute("visible", &visible);
 
         // Parse the image if there is one.
         const tinyxml2::XMLNode *imageNode = imageLayerElem->FirstChildElement("image");
 
-        if (imageNode)
-        {
+        if (imageNode) {
             image = new Image();
             image->Parse(imageNode);
-        }
-
-        // Parse the properties if any.
-        const tinyxml2::XMLNode *propertiesNode = imageLayerElem->FirstChildElement("properties");
-
-        if (propertiesNode)
-        {
-            properties.Parse(propertiesNode);
         }
     }
 

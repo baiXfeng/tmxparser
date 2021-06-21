@@ -183,6 +183,25 @@ namespace Tmx
         Parse( mapNode );
     }
 
+    void Map::ParseText(const std::string &text, const std::string &fileName)
+    {
+        file_name = fileName;
+
+        int lastSlash = fileName.find_last_of("/");
+
+        // Get the directory of the file using substring.
+        if (lastSlash > 0)
+        {
+            file_path = fileName.substr(0, lastSlash + 1);
+        }
+        else
+        {
+            file_path = "";
+        }
+
+        ParseText(text);
+    }
+
     int Map::FindTilesetIndex(int gid) const
     {
         // Clean up the flags from the gid (thanks marwes91).

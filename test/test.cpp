@@ -362,9 +362,9 @@ int main(int argc, char * argv[])
         // Get a group layer.
         const Tmx::GroupLayer *groupLayer = map->GetGroupLayer(i);
 
-        printf("Offset X: %d", groupLayer->GetOffsetX());
-        printf("Offset Y: %d", groupLayer->GetOffsetY());
-        printf("Number of Children: %d", groupLayer->GetNumChildren());
+        printf("Offset X: %f\n", groupLayer->GetOffsetX());
+        printf("Offset Y: %f\n", groupLayer->GetOffsetY());
+        printf("Number of Children: %d\n", groupLayer->GetNumChildren());
 
         for(int j = 0; j < groupLayer->GetNumChildren(); j++) {
           const Tmx::Layer *childLayer = groupLayer->GetChild(j);

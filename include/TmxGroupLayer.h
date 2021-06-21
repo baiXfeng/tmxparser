@@ -58,19 +58,7 @@ namespace Tmx
 
         int GetNumChildren() const noexcept;
 
-        /// Sets the offset for this GroupLayer
-        void SetOffset(const int offsetX, const int offsetY);
-
-        /// Returns the x offset.
-        int GetOffsetX() const noexcept;
-
-        /// Returns the y offset.
-        int GetOffsetY() const noexcept;
-
     private:
         std::vector<Tmx::Layer*> children;
-
-        int offsetX;
-        int offsetY;
     };
 }
