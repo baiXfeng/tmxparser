@@ -110,6 +110,11 @@ namespace Tmx
         elem->QueryFloatAttribute("opacity", &opacity);
         elem->QueryBoolAttribute("visible", &visible);
 
+        auto _tintcolor = elem->Attribute("tintcolor");
+        if (_tintcolor) {
+            tintcolor = Tmx::Color(_tintcolor);
+        }
+
         // Parse the properties if any.
         const tinyxml2::XMLNode *propertiesNode = elem->FirstChildElement("properties");
 

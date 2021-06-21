@@ -31,6 +31,7 @@
 
 #include "TmxPropertySet.h"
 #include "TmxMapTile.h"
+#include "TmxColor.h"
 
 namespace tinyxml2 {
     class XMLNode;
@@ -125,6 +126,9 @@ namespace Tmx
         /// Get the parallax factor of the layer.
         float GetParallaxY() const { return parallaxY; }
 
+        /// Get tintcolor of the layer.
+        Tmx::Color const& GetTintColor() const { return tintcolor; }
+
     protected:
         /// @cond INTERNAL
         const Tmx::Map *map;
@@ -152,6 +156,7 @@ namespace Tmx
 
         const Tmx::LayerType layerType;
 
+        Tmx::Color tintcolor;
         Tmx::PropertySet properties;
 
         static int nextParseOrder;
