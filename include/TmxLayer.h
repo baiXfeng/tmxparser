@@ -128,7 +128,8 @@ namespace Tmx
     protected:
         /// @cond INTERNAL
         const Tmx::Map *map;
-				const Tmx::Tile *tile;
+        const Tmx::Tile *tile;
+
         std::string name;
 
         int id;
